@@ -43,13 +43,11 @@
             pg: 'html5_inicis',
             merchant_uid: 'merchant_' + new Date().getTime(),
 
-            name: money + ' 캐쉬',
+            name: money + '캐쉬',
             amount: money,
             buyer_email: ${member.usermail },
-            buyer_name: ${member.username },
-            buyer_tel: ${member.usertel },
-            buyer_addr: ${member.useraddr },
-            buyer_postcode: 'leebook'
+            buyer_name: ${member.userid },
+            buyer_postcode: '123-456'
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
@@ -58,13 +56,35 @@
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
-                $.ajax({
-                    type: "GET", 
-                    url: "/member/pay3", //충전 금액값을 보낼 url 설정 일단 작업중
-                    data: {
-                        "amount" : money
-                    },
-                });
+				let purchaseVo = {
+						m_email: ${member.usermail },
+						s_name: ${member.username },
+						s_addr: ${member.addr},
+						s_phone: ${member.tel},
+						s_msg: s_msg,
+						s_zipNo: s_zipNo,
+						o_shipno: rsp.merchant_uid,
+						o_paidAmount: rsp.paid_amount,
+						o_paytype: rsp.pay_method
+						}
+					// 컨트롤러에 데이터를 전달하여 DB에 입력하는 로직
+	                		// 결제내역을 사용자에게 보여주기 위해 필요함.
+	               			$.ajax({
+						url : "placeorder.do",
+						type : "get",
+						data : purchaseVo,
+						dataType : "text",
+						success : function(result){
+							if(result == "y") {
+								alert(msg);
+								location.href = "orderComplete.do"; 
+							}else{
+								alert("디비입력실패");
+								return false;
+							}
+						},
+						error : function(a,b,c){}
+					});
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

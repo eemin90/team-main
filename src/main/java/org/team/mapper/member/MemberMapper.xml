@@ -77,6 +77,8 @@
 		m.regdate regdate,
 		m.updateDate updateDate,
 		m.usermail usermail,
+		m.tel tel,
+		m.addr addr,
 		m.money,
 		a.auth auth
 		FROM
@@ -94,6 +96,8 @@
 		<result property="usermail" column="usermail" />
 		<result property="userName" column="username" />
 		<result property="regdate" column="regdate" />
+		<result property="tel" column="tel" />
+		<result property="addr" column="addr" />
 		<result property="updateDate" column="updateDate" />
 		<result property="enabled" column="enabled" />
 		<result property="money" column="money" />
