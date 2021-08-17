@@ -69,7 +69,7 @@ $(function() {
 	});
 	
 	// navbar에서 선택한 category를 active 상태로 변경하여 navbar에 현재 category 표시
-	var currentUrl = document.location.href.split('http://localhost:8080/');
+	var currentUrl = document.location.href.split('http://13.125.228.102/');
 	var splitUrl = currentUrl[1];
 	
 	switch (splitUrl) {

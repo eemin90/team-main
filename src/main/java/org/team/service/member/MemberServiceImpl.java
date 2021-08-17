@@ -194,7 +194,7 @@ public class MemberServiceImpl implements MemberService {
 		log.info("*** Service in ckeck ***");
 		
 		return mapper.insert2(vo);
-	
+	}
 	@Override
 	public List<ProductVO> getPaidList(String userid) {
 		return paidMapper.getPaidList(userid);
