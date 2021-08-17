@@ -25,7 +25,7 @@
 			<input id="login-input1" class="form-control" name="username" placeholder="아이디" required />
 		</div>
 		<div class="form-group">
-			<input id="login-input2" type="password" class="form-control" name="password" placeholder="패스워드" required />
+			<input id="login-input2" type="password" class="form-control" name="password" placeholder="비밀번호" required />
 		</div>
 
 		<div id="remember-form" class="form-group form-check">

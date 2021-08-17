@@ -6,7 +6,7 @@
 
 <style>
 .nav-link{
-text-align: center;
+	text-align: center;
 }
 </style>
 
@@ -22,8 +22,8 @@ text-align: center;
 </c:url>
 
 <sec:authorize access="hasRole('ROLE_USER')">
-	<div class="container">
-	<nav class="navbar navbar-expand-lg" style="background-color: rgb(238, 238, 238);" >
+	<div id="div-white" class="container">
+	<nav class="navbar navbar-expand-lg">
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto" style="margin: 0 auto;">
 	      <li class="nav-item">
@@ -37,8 +37,8 @@ text-align: center;
 </sec:authorize>
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-	<div class="container">
-	<nav class="navbar navbar-expand-lg" style="background-color: rgb(238, 238, 238);">
+	<div id="div-white" class="container">
+	<nav class="navbar navbar-expand-lg">
 	  <form action="${listUrl }" method="get" class="form-inline" style="margin: 0 auto; ">
 	  	<select name="type" class="form-control mr-sm-2">
 	  		<option value="">--</option>

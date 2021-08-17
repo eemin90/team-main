@@ -25,7 +25,7 @@
   
   <select id="getListWithPaging" resultType="org.team.domain.board.BoardVO">
     
-     
+    <![CDATA[ 
     SELECT 
     	b.bno bno,
     	b.title title,
@@ -39,6 +39,8 @@
     	count(rno) replyCnt
     FROM tbl_board b LEFT JOIN tbl_reply r ON b.bno = r.bno
     					  INNER JOIN tbl_member m ON b.writer = m.userid
+    					  WHERE b.dislike_cnt < '20'
+	]]>    					  
 	
 	<include refid="criteria"></include> 
 	GROUP BY b.bno    
@@ -46,23 +48,7 @@
     LIMIT #{from}, #{amount}
 
   </select>
-  
-  <select id="getTotalCount" resultType="int">
-  SELECT COUNT(*) FROM tbl_board b JOIN tbl_member m
-  ON b.writer = m.userid
-  <include refid="criteria"></include>
-  </select>
-  
-  <insert id="insert">
-  	INSERT INTO tbl_board (title, content, writer)
-  	VALUES (#{title}, #{content}, #{writer}) <!-- get get  -->
-  </insert>
-  
-  <insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno" keyColumn="bno">
-  	INSERT INTO tbl_board (title, content, writer)
-  	VALUES (#{title}, #{content}, #{writer})
-  </insert>
-  
+ 
   <select id="read" resultType="org.team.domain.board.BoardVO">
   	SELECT 
   	 b.bno bno,
@@ -79,6 +65,26 @@
   						  JOIN tbl_member m ON b.writer = m.userid <!--  -->
   	WHERE b.bno = #{bno}
   </select>
+  
+  <select id="getTotalCount" resultType="int">
+  <![CDATA[
+  SELECT COUNT(*) FROM tbl_board b JOIN tbl_member m
+  ON b.writer = m.userid
+  WHERE b.dislike_cnt < '20'
+  ]]> 
+  <include refid="criteria"></include>
+  </select>
+  
+  <insert id="insert">
+  	INSERT INTO tbl_board (title, content, writer)
+  	VALUES (#{title}, #{content}, #{writer}) <!-- get get  -->
+  </insert>
+  
+  <insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno" keyColumn="bno">
+  	INSERT INTO tbl_board (title, content, writer)
+  	VALUES (#{title}, #{content}, #{writer})
+  </insert>
+  
   
   <delete id="delete">
   	DELETE FROM tbl_board WHERE bno = #{bno}

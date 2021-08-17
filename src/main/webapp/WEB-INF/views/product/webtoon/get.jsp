@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="pj" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,7 @@ var appRoot = "${appRoot}";
 var pid = "${webtoon.id}";
 var userid = "${pinfo.member.userid}";
 </script>
+<script src="${appRoot}/resources/js/productPaid.js"></script>
 <script src="${appRoot}/resources/js/productLike.js"></script>
 <script src="${appRoot}/resources/js/productReply.js"></script>
 
@@ -22,9 +24,6 @@ var userid = "${pinfo.member.userid}";
 <pj:navbar1 />
 <div class="container">
 	<c:url value="/product/webtoon/modify" var="modifyUrl">
-		<c:param name="id" value="${webtoon.id}" />
-	</c:url>
-	<c:url value="/product/webtoon/detail" var="detailUrl">
 		<c:param name="id" value="${webtoon.id}" />
 	</c:url>
 	
@@ -37,7 +36,7 @@ var userid = "${pinfo.member.userid}";
 				</div>
 				<div id="div-get-detail" class="ml-3">
 					<div id="div-get-detail-pname">
-						${webtoon.product_name}
+						<span id="pname">${webtoon.product_name}</span>
 					</div>
 					<div id="div-get-detail-likecomment">
 						<span>
@@ -52,9 +51,16 @@ var userid = "${pinfo.member.userid}";
 							<i class="fas fa-comment fa-flip-horizontal"></i>
 							<span id="replyCntAbove">${webtoon.reply_cnt}</span>
 						</span>
-						<input type="text" id="like-product-id" value="${webtoon.id}" hidden />
+						<p id="get-price">
+							<span><i class="fas fa-won-sign fa-sm"></i><fmt:formatNumber value="${webtoon.product_price}" /></span>
+							<span id="pprice" hidden>${webtoon.product_price}</span>
+						</p>
+						<input type="text" id="like-product-id" value="${webtoon.id}" name="id" hidden />
 						<input type="text" id="like-user-id" value="${pinfo.member.userid}" hidden />
 						<input type="text" id="like-check-like" value="${like.check_like}" hidden />
+						<input type="text" id="user-money" value="${userMoney.money}" hidden />
+						<input type="text" id="check-paid" value="${paid.check_paid}" hidden />
+						<input type="text" id="user-auth" value="${auth}" hidden />
 					</div>
 					<div id="div-get-detail-bottom" class="form-inline">
 						<div id="div-get-detail-wname">
@@ -64,10 +70,16 @@ var userid = "${pinfo.member.userid}";
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
 								<a class="btn btn-secondary" href="${modifyUrl}">수정/삭제</a>
 							</sec:authorize>
+							<sec:authorize access="!isAuthenticated()">
+								<span id="not-logined" class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="로그인 후 이용 가능">
+									<button class="btn btn-secondary" style="pointer-events: none;" type="button" disabled>작품보기</button>
+								</span>
+							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
 								<button type="button" id="like-btn" class="btn btn-warning">찜</button>
+								<button type="submit" id="detail-btn" class="btn btn-primary">작품보기</button>
+								<button type="button" id="buy-btn" class="btn btn-primary" hidden>구매</button>
 							</sec:authorize>
-							<a class="btn btn-primary" href="${detailUrl}">작품보기</a>
 						</div>
 					</div>
 				</div>
@@ -77,17 +89,20 @@ var userid = "${pinfo.member.userid}";
 	
 	<%-- 댓글 목록 --%>
 	<div id="div-white" class="container p-3">
-		<h5>
-			댓글 <c:if test="${webtoon.reply_cnt > 0}"><small>[</small><small id="replyCntBelow">${webtoon.reply_cnt}</small><small>]</small></c:if>
-		</h5>
+		<div class="row justify-content-between m-1">
+			<span id="reply-lists">
+				댓글 <c:if test="${webtoon.reply_cnt > 0}"><small>[</small><small id="replyCntBelow">${webtoon.reply_cnt}</small><small>]</small></c:if>
+			</span>
+			<sec:authorize access="isAuthenticated()">
+				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+			</sec:authorize>
+		</div>
 		
 		<hr>
+		
 		<ul class="list-unstyled" id="reply-list-container">
 			
 		</ul>
-		<sec:authorize access="isAuthenticated()">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
-		</sec:authorize>
 	</div>
 	
 	<%-- modal --%>

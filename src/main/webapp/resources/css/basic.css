@@ -261,6 +261,10 @@ body, #team-footer {
 	height: 161px;
 }
 
+#reply-lists {
+	font-size: 20px;
+}
+
 #div-get-detail {
 	width: 541px;
 	height: 161px;
@@ -277,7 +281,11 @@ body, #team-footer {
 
 #div-get-detail-likecomment {
 	font-size: 13px;
-	margin-bottom: 70px;
+	margin-bottom: 46px;
+}
+
+#get-price {
+	padding-top: 4px;
 }
 
 #div-get-detail-wname {

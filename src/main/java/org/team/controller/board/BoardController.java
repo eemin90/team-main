@@ -33,14 +33,15 @@ public class BoardController {
 	private BoardLikeService likeService;
 	
 	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") BoardCriteria cri, Model model) {
+	public void list(@ModelAttribute("cri") BoardCriteria cri, Model model, BoardLikeVO vo) {
 		int total = service.getTotal(cri);
-		
 		
 		List<BoardVO> list = service.getList(cri);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
+		
 		 
 	}
 

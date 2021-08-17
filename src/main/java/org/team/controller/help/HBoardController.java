@@ -83,7 +83,7 @@ public class HBoardController {
 	}
 	
 	@PostMapping("/modify")
-	@PreAuthorize("principal.username == #help.writer")// 720p
+	@PreAuthorize("principal.username == #board.writer")// 720p
 	public String modify(HBoardVO board, HBoardCriteria cri,
 			@RequestParam("file") MultipartFile file, RedirectAttributes rttr) {
 		

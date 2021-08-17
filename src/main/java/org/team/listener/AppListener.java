@@ -1,8 +1,14 @@
 package org.team.listener;
 
+import java.security.Principal;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.http.HttpServletRequest;
+
+import org.team.domain.member.MemberVO;
+import org.team.service.product.ProductPaidService;
 
 /**
  * Application Lifecycle Listener implementation class BoardListener
@@ -14,7 +20,7 @@ public class AppListener implements ServletContextListener {
      * Default constructor. 
      */
     public AppListener() {
-        // TODO Auto-generated constructor stub
+    	// TODO Auto-generated method stub
     }
 
 	/**

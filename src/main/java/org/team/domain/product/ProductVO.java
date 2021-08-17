@@ -12,6 +12,7 @@ public class ProductVO {
 	private String product_genre;
 	private String product_name;
 	private String writer_name;
+	private Long product_price;
 	private Date register_date;
 	private Date update_date;
 	

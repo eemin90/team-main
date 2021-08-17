@@ -9,23 +9,22 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>찜 목록ㅣLeeBook</title>
+<title>구매 목록ㅣLeeBook</title>
 </head>
 <body>
 <pj:navbar />
 <div class="container">
-
-	<%-- 찜 list --%>
+	<%-- 구매 list --%>
 	<div id="div-white" class="container">
 		<ul class="list-group list-group-horizontal sel">
-			<li class="list-group-item col-7">${pinfo.member.userName}님의 찜 목록</li>
+			<li class="list-group-item col-7">${pinfo.member.userName}님의 구매 목록</li>
 			<ul class="list-group list-group-horizontal">
-				<form action="${appRoot}/member/likes" method="post" id="form-likes-list" class="form-inline">
+				<form action="${appRoot}/member/paidList" method="post" id="form-paid-list" class="form-inline">
 					<input type="text" id="userid" name="userid" value="${pinfo.member.userid}" hidden />
 					<li class="list-group-item sel"><button type="submit" class="btn btn-primary">전체</button></li>
-					<li class="list-group-item sel"><button type="button" id="likes-webtoon-btn" class="btn btn-light">웹툰</button></li>
-					<li class="list-group-item sel"><button type="button" id="likes-webnovel-btn" class="btn btn-light">웹소설</button></li>
-					<li class="list-group-item sel"><button type="button" id="likes-book-btn" class="btn btn-light">책</button></li>
+					<li class="list-group-item sel"><button type="button" id="paid-webtoon-btn" class="btn btn-light">웹툰</button></li>
+					<li class="list-group-item sel"><button type="button" id="paid-webnovel-btn" class="btn btn-light">웹소설</button></li>
+					<li class="list-group-item sel"><button type="button" id="paid-book-btn" class="btn btn-light">책</button></li>
 				</form>
 			</ul>
 		</ul>
@@ -74,7 +73,7 @@
 			<c:if test="${empty list}">
 				<div class="container">
 					<ul class="list-group">
-						<li class="list-group-item"><h5>찜 목록이 비어있습니다.</h5></li>
+						<li class="list-group-item"><h5>구매 목록이 비어있습니다.</h5></li>
 					</ul>
 				</div>
 			</c:if>

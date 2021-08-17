@@ -9,7 +9,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title></title>
+<title>문의 내용ㅣLeeBook</title>
 <script>
 var appRoot = "${appRoot}";
 var helpHno = "${help.hno}";
@@ -20,67 +20,74 @@ var userid = "${pinfo.member.userid}";
 
 </head>
 <body>
-<pj:navbar>문의하기</pj:navbar>
+<pj:navbar></pj:navbar>
 
-<div class="container">
-<div id="alert1" class="alert alert-primary fade" role="alert">
-  
-</div>
-	<h1>문의내용</h1>
-	
-	<div class="row">
-		<div class="col-12">
-			<form>
-				<div class="form-group">
-					<label for="input1">제목</label>
-					<input readonly="readonly" id="input1" class="form-control" name="title" value="${help.title }">
-				</div>
-				<div class="form-group">     
-					<label for="textarea1">내용</label>
-					<textarea readonly="readonly" id="textarea1" class="form-control" 
-					name="content"><c:out value="${help.content }" /></textarea>
-				</div>
-				<c:if test="${not empty help.fileName }"> 
-					<div>
-						<img class="img-fluid" 
-						src="${imgRoot}help/${help.hno }/${help.fileName}">
-					</div>
-				</c:if> 
-				<div class="form-group">
-					<label for="input2">작성자</label>
-					<input type="hidden" readonly="readonly" id="input2" class="form-control" name="writer" value="${help.writer }">
-					<input readonly="readonly" class="form-control" value="${help.writerName }">
-				</div>
-				
-				<c:url value="/help/modify" var="modifyUrl">
-					<c:param name="hno" value="${help.hno }"/>
-					<c:param name="pageNum" value="${cri.pageNum }"/>
-					<c:param name="amount" value="${cri.amount }"/>
-					<c:param name="type" value="${cri.type }" />
-					<c:param name="keyword" value="${cri.keyword }" /> 
-				</c:url>
-				
-				<c:if test="${pinfo.member.userid eq help.writer }" >
-				<a class="btn btn-secondary" href="${modifyUrl }">수정/삭제</a>	
-				</c:if>
-			</form>
+<div id="div-white" class="container mb-3">
+	<div id="div-white-wrapper" class="container">
+	<c:if test="${not empty messageBody}">
+		<div id="alert1" class="alert alert-primary fade" role="alert">
+		
 		</div>
-	</div>
-</div>
-
-<div class="container">
-	<div class="row">
-		<div class="col-12">
-			<h3>댓글</h3>
-			
-			<sec:authorize access="isAuthenticated()">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>				
-			</sec:authorize>
-			<ul class="list-unstyled" id="reply-list-container">
-			</ul>
+	</c:if>
+		<h4>문의 내용</h4>
+		
+		<div class="row">
+			<div class="col-12">
+				<form>
+					<div class="form-group">
+						<label for="input1">제목</label>
+						<input readonly="readonly" id="input1" class="form-control" name="title" value="${help.title }">
+					</div>
+					<div class="form-group">     
+						<label for="textarea1">내용</label>
+						<textarea readonly="readonly" id="textarea1" class="form-control" 
+						name="content"><c:out value="${help.content }" /></textarea>
+					</div>
+					<c:if test="${not empty help.fileName }"> 
+						<div>
+							<img class="img-fluid" 
+							src="${imgRoot}help/${help.hno }/${help.fileName}">
+						</div>
+					</c:if> 
+					<div class="form-group">
+						<label for="input2">작성자</label>
+						<input type="hidden" readonly="readonly" id="input2" class="form-control" name="writer" value="${help.writer }">
+						<input readonly="readonly" class="form-control" value="${help.writerName }">
+					</div>
+					
+					<c:url value="/help/modify" var="modifyUrl">
+						<c:param name="hno" value="${help.hno }"/>
+						<c:param name="pageNum" value="${cri.pageNum }"/>
+						<c:param name="amount" value="${cri.amount }"/>
+						<c:param name="type" value="${cri.type }" />
+						<c:param name="keyword" value="${cri.keyword }" /> 
+					</c:url>
+					
+					<c:if test="${pinfo.member.userid eq help.writer }" >
+					<a class="btn btn-secondary" href="${modifyUrl }">수정/삭제</a>	
+					</c:if>
+				</form>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="div-white" class="container p-3">
+	<div class="row">
+		<div class="col-12">
+			<div class="row justify-content-between m-1">
+				<span style="font-size: 25px;">댓글</span>
+				<sec:authorize access="isAuthenticated()">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+				</sec:authorize>
+			</div>
+			<br>
+			
+			<ul class="list-unstyled" id="reply-list-container">
+			</ul>
+		</div>
+	</div>
+</div>
 
 <!-- 댓글 입력 모달  -->
 
@@ -150,6 +157,6 @@ var userid = "${pinfo.member.userid}";
     </div>
   </div>
 </div>
-
+<pj:footer />
 </body>
 </html>

@@ -8,10 +8,6 @@
 	<c:param name="keyword" value="${cri.keyword}" />
 </c:url>
 
-<c:url value="/member/likes" var="likesUrl">
-	<c:param name="userid" value="${pinfo.member.userid}"></c:param>
-</c:url>
-
 <div id="team-header" class="d-flex flex-column sticky-top pt-3 mb-3">
 	<div id="team-header-above" class="mx-auto">
 		<nav class="navbar navbar-light">
@@ -59,11 +55,15 @@
 									<div class="dropdown-divider"></div>
 								</sec:authorize>
 								<sec:authorize access="!hasRole('ROLE_ADMIN')">
-									<a class="dropdown-item"><small>내 캐시</small><br><fmt:formatNumber value="${pinfo.member.money}" />원</a>
+									<a class="dropdown-item"><small>내 캐시</small><br><span><fmt:formatNumber value="${userMoney.money}" /></span>원</a>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="${appRoot}/member/info">회원 정보</a>
-									<a class="dropdown-item" href="${likesUrl}">찜 목록</a>
-									<a class="dropdown-item" href="${appRoot}/member/pay2">캐시 충전</a>
+									<form action="${appRoot}/member/likes" method="post" id="form-dropdown" class="form-inline">
+										<input type="text" id="userid" name="userid" value="${pinfo.member.userid}" hidden />
+										<button class="dropdown-item">찜 목록</button>
+										<button id="dropdown-paid" class="dropdown-item">구매 목록</button>
+									</form>
+									<a class="dropdown-item" href="${appRoot}/member/pay">캐시 충전</a>
 									<div class="dropdown-divider"></div>
 								</sec:authorize>
 								<a class="dropdown-item" href="${appRoot}/logout">로그아웃</a>
@@ -107,11 +107,15 @@
 				<span id="nav-help-underline" class=""></span>
 				
 				<div id="dropdown-menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-					<a class="dropdown-item" href="${appRoot}/help/list">1:1 문의하기</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="${appRoot}/help/map">찾아오시는 길</a>
-					<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<sec:authorize access="!isAuthenticated()">
+						<a class="dropdown-item" href="${appRoot}/help/map">찾아오시는 길</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_USER')">
+						<a class="dropdown-item" href="${appRoot}/help/list">1:1 문의하기</a>
 						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="${appRoot}/help/map">찾아오시는 길</a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<a class="dropdown-item" href="${appRoot}/help/admin">1:1 문의관리</a>
 					</sec:authorize>
 				</div>

@@ -98,6 +98,18 @@
   	DELETE FROM tbl_help_board WHERE hno = #{hno}
   </delete>
 
+  <update id="update">
+  	UPDATE tbl_help_board
+  	
+  	SET
+  		title = #{title},
+  		content = #{content},
+  		writer = #{writer},
+  		updateDate = NOW()
+  	
+  	WHERE
+  		hno = #{hno}
+  </update>
   
   <delete id="removeByUserid">
   DELETE FROM tbl_help_board

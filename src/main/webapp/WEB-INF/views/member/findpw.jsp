@@ -8,16 +8,15 @@
 <head>
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
-<link href="<c:url value='/resources/css/basic.css'/>" rel="stylesheet" />
 
-<title>패스워드 찾기ㅣLeeBook</title>
+<title>비밀번호 찾기ㅣLeeBook</title>
 
 
 </head>
 <body>
 <pj:navbar />
 <div id="div-findpw" class="container mt-5">
-    <h2>패스워드 찾기</h2>
+    <h2>비밀번호 찾기</h2>
 
     <br>
 
@@ -42,9 +41,6 @@
 			</div>
 			<input class="btn btn-primary" type="submit" id="gogofindid" value="찾기">
 		</form>
-
-		<hr hidden class="result">
-		<h5>고객님의 정보와 일치하는 패스워드 입니다.</h5>
 
 		<div id="resultid">
 			<h3>${userpw}</h3>

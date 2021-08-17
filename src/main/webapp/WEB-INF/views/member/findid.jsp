@@ -8,7 +8,6 @@
 <head>
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
-<link href="<c:url value='/resources/css/basic.css'/>" rel="stylesheet" />
 
 <title>아이디 찾기ㅣLeeBook</title>
 

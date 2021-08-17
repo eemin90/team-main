@@ -42,13 +42,17 @@
 						<label for="product-register-input4">작가</label>
 						<input id="product-register-input4" name="writer_name" class="form-control" required />
 					</div>
+					<div class="form-group">
+						<label for="product-register-input5">가격</label>
+						<input id="product-register-input5" name="product_price" class="form-control" required />
+					</div>
 	 				<div class="form-group">
-						<label for="product-register-input5">작품 커버</label>
-						<input type="file" id="product-register-input5" name="file1" class="form-control" accept="image/*" required />
+						<label for="product-register-input6">작품 커버</label>
+						<input type="file" id="product-register-input6" name="file1" class="form-control" accept="image/*" required />
 					</div>
 					<div class="form-group">
-						<label for="product-register-input6">작품 파일</label>
-						<input type="file" id="product-register-input6" name="file2" class="form-control" accept="image/*" required />
+						<label for="product-register-input7">작품 파일</label>
+						<input type="file" id="product-register-input7" name="file2" class="form-control" accept="image/*" required />
 					</div>
 					<input type="submit" id="product-register-btn" class="btn btn-primary" value="등록" />
 				</form>

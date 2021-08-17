@@ -43,14 +43,17 @@
 		var container = $("#reply-list-container").empty();
 		
 		for (var reply of list) {
-		var replyHTML = `
-			<li class="media" id="reply${reply.rno}" data-rno="${reply.rno}">
-				<div class="media-body">
-					<h5 class="my-4">${reply.replyerName}</h5>
-					<p>${reply.reply}</p>
-					<small>${new Date(reply.replyDate).toISOString().split("T")[0]}</small>
-				</div>
-			</li>`;
+			var replyHTML = `
+				<li class="media" id="reply${reply.rno}" data-rno="${reply.rno}">
+					<div class="media-body">
+						<div class="d-flex justify-content-between">
+							<strong class="flex-grow-1 bd-highlight">${reply.replyerName}</strong>
+							<small class="bd-highlight text-muted">${new Date(reply.replyDate).toISOString().split("T")[0]}</small><br>
+						</div>
+						<small>${reply.reply}</small><hr>
+					</div>
+				</li>
+			`;
 			var replyComponent = $(replyHTML).click(function() {
 				showModifyModal($(this).attr("data-rno"));
 			});

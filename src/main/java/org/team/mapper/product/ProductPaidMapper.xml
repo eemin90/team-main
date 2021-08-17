@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.team.mapper.product.ProductPaidMapper">
+	
+	<select id="getPaid" resultType="org.team.domain.product.ProductPaidVO">
+		SELECT check_paid FROM tbl_product_paid
+		WHERE product_id = #{id} AND user_id = #{userid}
+	</select>
+	
+	<insert id="buy" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		INSERT INTO tbl_product_paid (product_id, user_id, check_paid)
+		VALUES (#{product_id}, #{user_id}, 1)
+	</insert>
+	
+	<select id="readPrice" resultType="org.team.domain.product.ProductVO">
+		SELECT product_price FROM tbl_product
+		WHERE id = #{product_id}
+	</select>
+	
+	<select id="getPaidList" resultType="org.team.domain.product.ProductVO">
+		SELECT
+			p.id id,
+		    p.product_category product_category,
+		    p.product_genre product_genre,
+		    p.product_name product_name,
+		    p.writer_name writer_name,
+		    p.register_date register_date,
+		    p.update_date update_date,
+		    c.file_name file_name
+		    
+		FROM tbl_product p JOIN tbl_product_cover c ON p.id = c.product_id
+							JOIN tbl_product_paid d ON p.id = d.product_id
+		
+		WHERE d.user_id = #{userid}
+	</select>
+	
+	<select id="getPaidListWebtoon" resultType="org.team.domain.product.ProductVO">
+		SELECT
+			p.id id,
+		    p.product_category product_category,
+		    p.product_genre product_genre,
+		    p.product_name product_name,
+		    p.writer_name writer_name,
+		    p.register_date register_date,
+		    p.update_date update_date,
+		    c.file_name file_name
+		    
+		FROM tbl_product p JOIN tbl_product_cover c ON p.id = c.product_id
+							JOIN tbl_product_paid d ON p.id = d.product_id
+		
+		WHERE d.user_id = #{userid} AND p.product_category = 1
+	</select>
+	
+	<select id="getPaidListWebnovel" resultType="org.team.domain.product.ProductVO">
+		SELECT
+			p.id id,
+		    p.product_category product_category,
+		    p.product_genre product_genre,
+		    p.product_name product_name,
+		    p.writer_name writer_name,
+		    p.register_date register_date,
+		    p.update_date update_date,
+		    c.file_name file_name
+		    
+		FROM tbl_product p JOIN tbl_product_cover c ON p.id = c.product_id
+							JOIN tbl_product_paid d ON p.id = d.product_id
+		
+		WHERE d.user_id = #{userid} AND p.product_category = 2
+	</select>
+	
+	<select id="getPaidListBook" resultType="org.team.domain.product.ProductVO">
+		SELECT
+			p.id id,
+		    p.product_category product_category,
+		    p.product_genre product_genre,
+		    p.product_name product_name,
+		    p.writer_name writer_name,
+		    p.register_date register_date,
+		    p.update_date update_date,
+		    c.file_name file_name
+		    
+		FROM tbl_product p JOIN tbl_product_cover c ON p.id = c.product_id
+							JOIN tbl_product_paid d ON p.id = d.product_id
+		
+		WHERE d.user_id = #{userid} AND p.product_category = 3
+	</select>
+	
+</mapper>

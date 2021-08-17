@@ -7,11 +7,12 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>게시물 작성</title>
+<title>게시물 작성ㅣLeeBook</title>
 </head>
 <body>
 <pj:navbar />
-<div class="container">
+<div id="div-white" class="container mb-3">
+<div id="div-white-wrapper" class="container">
 	<h4>게시물 작성</h4>
 	
 	<div class="row">
@@ -39,5 +40,7 @@
 		</div>
 	</div>
 </div>
+</div>
+<pj:footer />
 </body>
 </html>

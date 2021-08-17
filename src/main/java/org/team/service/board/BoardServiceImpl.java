@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.team.domain.board.BoardVO;
 import org.team.domain.board.BoardCriteria;
+import org.team.domain.board.BoardVO;
 import org.team.domain.board.FileVO;
+import org.team.mapper.board.BoardLikeMapper;
 import org.team.mapper.board.BoardMapper;
 import org.team.mapper.board.FileMapper;
 import org.team.mapper.board.ReplyMapper;
@@ -46,6 +46,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Setter (onMethod_ = @Autowired)
 	private FileMapper fileMapper;
+	
+	@Setter (onMethod_ = @Autowired)
+	private BoardLikeMapper likeMapper;
 		
 	@Override
 	public void register(BoardVO board) {
@@ -122,6 +125,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	@Transactional
 	public boolean remove(Long bno) { 
+		
+		likeMapper.deleteLikeByBno(bno);
+		likeMapper.deleteDislikeByBno(bno);
 		
 		replyMapper.deleteByBno(bno);
 		

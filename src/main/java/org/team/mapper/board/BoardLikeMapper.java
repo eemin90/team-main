@@ -17,5 +17,8 @@ public interface BoardLikeMapper {
 	
 	public BoardLikeVO read(@Param("bno") String bno, @Param("userid") String userid);
 	public BoardLikeVO read1(@Param("bno") String bno, @Param("userid") String userid);
+	
+	public void deleteLikeByBno(Long bno);
+	public void deleteDislikeByBno(Long bno);
 
 }

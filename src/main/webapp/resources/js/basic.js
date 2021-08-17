@@ -115,6 +115,70 @@ $(function() {
 			break;
 	}
 	
+	// 찜 목록에서 카테고리 이동
+	$('#likes-webtoon-btn').click(function() {
+		$('#form-likes-list')
+		.attr('action', getContextPath() + "/member/likesWebtoon")
+		.submit();
+	});
+	$('#likes-webnovel-btn').click(function() {
+		$('#form-likes-list')
+		.attr('action', getContextPath() + "/member/likesWebnovel")
+		.submit();
+	});
+	$('#likes-book-btn').click(function() {
+		$('#form-likes-list')
+		.attr('action', getContextPath() + "/member/likesBook")
+		.submit();
+	});
+	
+	// navbar dropdown 구매 목록 버튼 실행
+	$('#dropdown-paid').click(function() {
+		$('#form-dropdown')
+		.attr('action', getContextPath() + "/member/paidList")
+		.submit();
+	});
+	
+	// 구매 목록에서 카테고리 이동
+	$('#paid-webtoon-btn').click(function() {
+		$('#form-paid-list')
+		.attr('action', getContextPath() + "/member/paidListWebtoon")
+		.submit();
+	});
+	$('#paid-webnovel-btn').click(function() {
+		$('#form-paid-list')
+		.attr('action', getContextPath() + "/member/paidListWebnovel")
+		.submit();
+	});
+	$('#paid-book-btn').click(function() {
+		$('#form-paid-list')
+		.attr('action', getContextPath() + "/member/paidListBook")
+		.submit();
+	});
+	
+	// get.jsp에서 detail.jsp로 URL 조작하여 이동 방지(해당 상품 구매X, 정기권X 인 경우에도 URL만 수정하여 접근 가능한 부분이 있어서 접근 불가하게)
+	var checkUrl = splitUrl.split('?')[0];
+	var paidCheck = $('#check-paid').val(); // 해당 상품을 구매한 적이 있는지 체크
+	var auth = $('#user-auth').val();		// 현재 사용자 권한
+	
+	if ((checkUrl == 'team/product/webtoon/detail') || (checkUrl == 'team/product/webnovel/detail') || (checkUrl == 'team/product/book/detail')) {
+		// 해당 URL에 접근했을 때 정기권을 구매하지 않았고([ROLE_USER]), 해당 상품을 구매한적이 없으면(paidCheck != '1') alert 발생하고 페이지 뒤로가기 실행
+		if ((auth == '[ROLE_USER]') && (paidCheck != '1')) {
+			alert('해당 방식의 접근은 불가합니다.\n해당 상품을 구매하거나, 정기권을 구매하여 이용해주세요.');
+			history.back();
+		}
+	}
+	
+	// 각 상품의 get.jsp에서 로그인이 되어있지 않은 경우 작품보기 버튼에 마우스 올리면 로그인 해주세요 표시
+	$('#not-logined').on({
+		mouseenter: function() {
+			$('#not-logined').tooltip('show');
+		},
+		mouseleave: function() {
+			$('#not-logined').tooltip('hide');
+		}
+	});
+	
 	// 현재 각 상품 detail 페이지인 경우만 navbar1에서 product_name 표시
 	var splitUrl1 = splitUrl.split('?');
 	var splitUrl2 = splitUrl1[0];
@@ -154,10 +218,11 @@ $(function() {
 		var genre = $('#product-register-input2').val();
 		var title = $('#product-register-input3').val();
 		var writer = $('#product-register-input4').val();
-		var cover = $('#product-register-input5').val();
-		var file = $('#product-register-input6').val();
+		var price = $('#product-register-input5').val();
+		var cover = $('#product-register-input6').val();
+		var file = $('#product-register-input7').val();
 		
-		if ((genre != '') && (title != '') && (writer != '') && (cover != '') && (file != '')) {
+		if ((genre != '') && (title != '') && (writer != '') && (price != '') && (cover != '') && (file != '')) {
 			if (category == '1') {
 				$("#product-register-form")
 				.attr("action", getContextPath() + "/product/webtoon/register")

@@ -81,6 +81,7 @@
 		    p.product_genre product_genre,
 		    p.product_name product_name,
 		    p.writer_name writer_name,
+		    p.product_price product_price,
 		    p.register_date register_date,
 		    p.update_date update_date,
 		    p.like_cnt like_cnt,
@@ -94,8 +95,8 @@
 	</select>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		INSERT INTO tbl_product (product_category, product_genre, product_name, writer_name)
-		VALUES (#{product_category}, #{product_genre}, #{product_name}, #{writer_name})
+		INSERT INTO tbl_product (product_category, product_genre, product_name, writer_name, product_price)
+		VALUES (#{product_category}, #{product_genre}, #{product_name}, #{writer_name}, #{product_price})
 	</insert>
 	
 	<select id="readCover" resultType="org.team.domain.product.ProductVO">

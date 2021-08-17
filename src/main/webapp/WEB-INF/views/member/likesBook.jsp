@@ -15,28 +15,18 @@
 <pj:navbar />
 <div class="container">
 
-	<c:url value="/member/likes" var="likesUrl">
-		<c:param name="userid" value="${pinfo.member.userid}" />
-	</c:url>
-	<c:url value="/member/likesWebtoon" var="likesWebtoonUrl">
-		<c:param name="userid" value="${pinfo.member.userid}" />
-	</c:url>
-	<c:url value="/member/likesWebnovel" var="likesWebnovelUrl">
-		<c:param name="userid" value="${pinfo.member.userid}" />
-	</c:url>
-	<c:url value="/member/likesBook" var="likesBookUrl">
-		<c:param name="userid" value="${pinfo.member.userid}" />
-	</c:url>
-
 	<%-- 찜 list --%>
 	<div id="div-white" class="container">
 		<ul class="list-group list-group-horizontal sel">
 			<li class="list-group-item col-7">${pinfo.member.userName}님의 찜 목록</li>
 			<ul class="list-group list-group-horizontal">
-				<li class="list-group-item sel"><a href="${likesUrl}"><button type="button" class="btn btn-light">전체</button></a></li>
-				<li class="list-group-item sel"><a href="${likesWebtoonUrl}"><button type="button" class="btn btn-light">웹툰</button></a></li>
-				<li class="list-group-item sel"><a href="${likesWebnovelUrl}"><button type="button" class="btn btn-light">웹소설</button></a></li>
-				<li class="list-group-item sel"><a href="${likesBookUrl}"><button type="button" class="btn btn-primary">  책</button></a></li>
+				<form action="${appRoot}/member/likes" method="post" id="form-likes-list" class="form-inline">
+					<input type="text" id="userid" name="userid" value="${pinfo.member.userid}" hidden />
+					<li class="list-group-item sel"><button type="submit" class="btn btn-light">전체</button></li>
+					<li class="list-group-item sel"><button type="button" id="likes-webtoon-btn" class="btn btn-light">웹툰</button></li>
+					<li class="list-group-item sel"><button type="button" id="likes-webnovel-btn" class="btn btn-light">웹소설</button></li>
+					<li class="list-group-item sel"><button type="button" id="likes-book-btn" class="btn btn-primary">책</button></li>
+				</form>
 			</ul>
 		</ul>
 		<form class="form-inline">

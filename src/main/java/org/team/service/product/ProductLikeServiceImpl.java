@@ -2,7 +2,6 @@ package org.team.service.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.team.domain.member.MemberVO;
 import org.team.domain.product.ProductLikeVO;
 import org.team.mapper.product.ProductLikeMapper;
 

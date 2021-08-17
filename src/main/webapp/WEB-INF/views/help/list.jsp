@@ -13,7 +13,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp"%>
 
-<title>1:1 문의</title>
+<title>1:1 문의ㅣLeeBook</title>
 
 <script>
 	$(document).ready(function() {
@@ -32,72 +32,73 @@
 </head>
 <body>
 <pj:navbar />
+	<div id="div-white" class="container">
+		<div id="div-white-wrapper" class="container">
 	
-	<div class="container">
-
-		<h4>1:1 문의</h4>
-			<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list }" var="help" >
-				<c:if test="${help.writerName eq pinfo.member.userName}">
+			<h4>1:1 문의</h4>
+				<table class="table table-hover">
+				<thead>
 					<tr>
-						<td><c:url value="/help/get" var="getUrl">
-								<c:param name="hno" value="${help.hno }" />
-								<c:param name="pageNum" value="${pageMaker.cri.pageNum }" />
-								<c:param name="amount" value="${pageMaker.cri.amount }" />
-								<c:param name="type" value="${pageMaker.cri.type }" />
-								<c:param name="keyword" value="${pageMaker.cri.keyword }" />
-							</c:url> 
-							<a href="${getUrl}"> 
-								${help.title } 
-								<c:if test="${help.replyCnt > 0 }">
-									[${help.replyCnt }] 
-								</c:if>
-							</a>
-							
-						</td>
-						<td>${help.writerName }</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd"
-								value="${help.regdate }" /></td>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
-					</c:if>
-				
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-
-	<div>
-		<nav aria-label="Page navigation example">
-			<ul id="list-pagenation1" class="pagination justify-content-center">
-
-				<c:if test="${pageMaker.prev }">
-					<li class="page-item"><a class="page-link"
-						href="${pageMaker.startPage - 1 }" tabindex="-1"
-						aria-disabled="true">Previous</a></li>
-				</c:if>
-
-				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+				</thead>
+				<tbody>
+					<c:forEach items="${list }" var="help" >
+					<c:if test="${help.writerName eq pinfo.member.userName}">
+						<tr>
+							<td><c:url value="/help/get" var="getUrl">
+									<c:param name="hno" value="${help.hno }" />
+									<c:param name="pageNum" value="${pageMaker.cri.pageNum }" />
+									<c:param name="amount" value="${pageMaker.cri.amount }" />
+									<c:param name="type" value="${pageMaker.cri.type }" />
+									<c:param name="keyword" value="${pageMaker.cri.keyword }" />
+								</c:url> 
+								<a href="${getUrl}"> 
+									${help.title } 
+									<c:if test="${help.replyCnt > 0 }">
+										[${help.replyCnt }] 
+									</c:if>
+								</a>
+								
+							</td>
+							<td>${help.writerName }</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${help.regdate }" /></td>
+						</tr>
+						</c:if>
 					
-					<li class="page-item ${num == cri.pageNum ? 'active' : '' }"><a class="page-link" 
-					href="${num }">${num }</a></li>
-				</c:forEach>
-
-				<c:if test="${pageMaker.next }">
-					<li class="page-item"><a class="page-link"
-						href="${pageMaker.endPage + 1 }">Next</a></li>
-				</c:if>
-
-			</ul>
-		</nav>
-	<!--페이지 링크용 -->
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	
+		<div>
+			<nav aria-label="Page navigation example">
+				<ul id="list-pagenation1" class="pagination justify-content-center">
+	
+					<c:if test="${pageMaker.prev }">
+						<li class="page-item"><a class="page-link"
+							href="${pageMaker.startPage - 1 }" tabindex="-1"
+							aria-disabled="true">Previous</a></li>
+					</c:if>
+	
+					<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="num">
+						
+						<li class="page-item ${num == cri.pageNum ? 'active' : '' }"><a class="page-link" 
+						href="${num }">${num }</a></li>
+					</c:forEach>
+	
+					<c:if test="${pageMaker.next }">
+						<li class="page-item"><a class="page-link"
+							href="${pageMaker.endPage + 1 }">Next</a></li>
+					</c:if>
+	
+				</ul>
+			</nav>
+		</div>
+		<!--페이지 링크용 -->
 		<div style="display:none">
 			<form id="actionForm" action="${appRoot }/help/list" method="get">
 				<input name="pageNum" value="${cri.pageNum }" /> 

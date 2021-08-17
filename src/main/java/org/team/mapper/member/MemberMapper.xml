@@ -16,7 +16,7 @@
 			username = #{username} AND usermail = #{usermail}
 	</select>
 	
-		<select id="read3" parameterType="String" resultType="org.team.domain.member.MemberVO">
+	<select id="read3" parameterType="String" resultType="org.team.domain.member.MemberVO">
 		SELECT
 			userid userid,
 			userpw userpw,
@@ -27,6 +27,17 @@
 		WHERE
 			userid = #{userid} AND username = #{username} AND usermail = #{usermail}
 	</select>
+	
+	<select id="readMoney" resultType="org.team.domain.member.MemberVO">
+		SELECT money FROM tbl_member
+		WHERE userid = #{user_id}
+	</select>
+	
+	<update id="buyProduct">
+		UPDATE tbl_member
+		SET money = money - #{price}
+		WHERE userid = #{user_id}
+	</update>
 	
 	<update id="setPw">
 		UPDATE tbl_member
@@ -83,7 +94,7 @@
 		m.usermail usermail,
 		m.tel tel,
 		m.addr addr,
-		m.money,
+		m.money money,
 		a.auth auth
 		FROM
 		tbl_member m LEFT JOIN tbl_member_auth a ON m.userid = a.userid

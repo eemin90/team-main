@@ -9,7 +9,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>글 보기</title>
+<title>글 보기ㅣLeeBook</title>
 <script>
 var appRoot = "${appRoot}";
 var boardBno = "${board.bno}";
@@ -23,77 +23,84 @@ var userid = "${pinfo.member.userid}";
 <body>
 <pj:navbar></pj:navbar>
 
-<div class="container">
-<div id="alert1" class="alert alert-primary fade" role="alert">
-  
-</div>
-	<h3>글 보기</h3>
-	<p><i class="far fa-thumbs-up"></i><span id="like-cnt">${board.like_cnt}</span>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i><span id="dislike-cnt">${board.dislike_cnt}</span></p>
-	
-	<div class="row">
-		<div class="col-12">
-		<input type="text" id="like-bno" value="${board.bno}" hidden />
-		<input type="text" id="like-user-id" value="${pinfo.member.userid}" hidden />
-		<input type="text" id="like-check-like" value="${like.check_like}" hidden />
-		<input type="text" id="like-check-dislike" value="${dislike.check_dislike}" hidden />
-			<form>
-				<div class="form-group">
-					<label for="input1">제목</label>
-					<input readonly="readonly" id="input1" class="form-control" name="title" value="${board.title }">
-				</div>
-				<div class="form-group">
-					<label for="textarea1">내용</label>
-					<textarea readonly="readonly" id="textarea1" class="form-control" 
-					name="content"><c:out value="${board.content }" /></textarea>
-				</div>
-				<c:if test="${not empty board.fileName }"> 
-					<div>
-						<img class="img-fluid" 
-						src="${imgRoot}board/${board.bno }/${board.fileName}">  
+<div id="div-white" class="container mb-3">
+	<div id="div-white-wrapper" class="container">
+	<c:if test="${not empty messageBody}">
+		<div id="alert1" class="alert alert-primary fade" role="alert">
+		  
+		</div>
+	</c:if>
+		<h4>글 보기</h4>
+		<p><i class="far fa-thumbs-up"></i><span id="like-cnt">${board.like_cnt}</span>&nbsp;&nbsp;<i class="far fa-thumbs-down"></i><span id="dislike-cnt">${board.dislike_cnt}</span></p>
+		
+		<div class="row">
+			<div class="col-12">
+			<input type="text" id="like-bno" value="${board.bno}" hidden />
+			<input type="text" id="like-user-id" value="${pinfo.member.userid}" hidden />
+			<input type="text" id="like-check-like" value="${like.check_like}" hidden />
+			<input type="text" id="like-check-dislike" value="${dislike.check_dislike}" hidden />
+				<form>
+					<div class="form-group">
+						<label for="input1">제목</label>
+						<input readonly="readonly" id="input1" class="form-control" name="title" value="${board.title }">
 					</div>
-				</c:if> 
-				<div class="form-group">
-					<label for="input2">작성자</label>
-					<input type="hidden" readonly="readonly" id="input2" class="form-control" name="writer" value="${board.writer }">
-					<input readonly="readonly" class="form-control" value="${board.writerName }">
-				</div>
-				
-				<c:url value="/board/modify" var="modifyUrl">
-					<c:param name="bno" value="${board.bno }"/>
-					<c:param name="pageNum" value="${cri.pageNum }"/>
-					<c:param name="amount" value="${cri.amount }"/>
-					<c:param name="type" value="${cri.type }" />
-					<c:param name="keyword" value="${cri.keyword }" />
-				</c:url>
-				
-				<c:if test="${pinfo.member.userid eq board.writer }" >
-					<a class="btn btn-secondary" href="${modifyUrl }">수정/삭제</a><br><br>	
-				</c:if>
-				
-				<sec:authorize access="isAuthenticated()">
-					<button type="button" id="like-btn" class="btn btn-primary"><i class="far fa-thumbs-up"></i>&nbsp;좋아요</button>
-					<button type="button" id="dislike-btn" class="btn btn-danger"><i class="far fa-thumbs-down"></i>&nbsp;싫어요</button>
-				</sec:authorize>
-				
-			</form>
+					<div class="form-group">
+						<label for="textarea1">내용</label>
+						<textarea readonly="readonly" id="textarea1" class="form-control" 
+						name="content"><c:out value="${board.content }" /></textarea>
+					</div>
+					<c:if test="${not empty board.fileName }"> 
+						<div>
+							<img class="img-fluid" 
+							src="${imgRoot}board/${board.bno }/${board.fileName}">
+						</div>
+						<br>
+					</c:if> 
+					<div class="form-group">
+						<label for="input2">작성자</label>
+						<input type="hidden" readonly="readonly" id="input2" class="form-control" name="writer" value="${board.writer }">
+						<input readonly="readonly" class="form-control" value="${board.writerName }">
+					</div>
+					
+					<c:url value="/board/modify" var="modifyUrl">
+						<c:param name="bno" value="${board.bno }"/>
+						<c:param name="pageNum" value="${cri.pageNum }"/>
+						<c:param name="amount" value="${cri.amount }"/>
+						<c:param name="type" value="${cri.type }" />
+						<c:param name="keyword" value="${cri.keyword }" />
+					</c:url>
+					
+					<c:if test="${pinfo.member.userid eq board.writer }" >
+						<a class="btn btn-secondary" href="${modifyUrl }">수정/삭제</a><br><br>	
+					</c:if>
+					
+					<sec:authorize access="isAuthenticated()">
+						<button type="button" id="like-btn" class="btn btn-primary"><i class="far fa-thumbs-up"></i>&nbsp;좋아요</button>
+						<button type="button" id="dislike-btn" class="btn btn-danger"><i class="far fa-thumbs-down"></i>&nbsp;싫어요</button>
+					</sec:authorize>
+					
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="container">
+<div id="div-white" class="container p-3">
 	<div class="row">
 		<div class="col-12">
+			<div class="row justify-content-between m-1">
+				<span style="font-size: 25px;">댓글</span>
+				<sec:authorize access="isAuthenticated()">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+				</sec:authorize>
+			</div>
 			<br>
-			<h3>댓글</h3>
 			
-			<sec:authorize access="isAuthenticated()">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
-			</sec:authorize>
 			<ul class="list-unstyled" id="reply-list-container">
 			</ul>
-			</div>
 		</div>
 	</div>
+</div>
 	
 <!-- 댓글 입력 모달  -->
 <div class="modal fade" id="reply-insert-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,6 +169,6 @@ var userid = "${pinfo.member.userid}";
     </div>
   </div>
 </div>
-
+<pj:footer />
 </body>
 </html>

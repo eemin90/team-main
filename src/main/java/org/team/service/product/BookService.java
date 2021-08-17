@@ -3,6 +3,7 @@ package org.team.service.product;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.team.domain.product.ProductPaidVO;
 import org.team.domain.product.ProductVO;
 
 public interface BookService {

@@ -21,6 +21,7 @@ import org.team.domain.member.MemberVO;
 import org.team.domain.product.ProductVO;
 import org.team.mapper.member.MemberMapper;
 import org.team.mapper.product.ProductLikeMapper;
+import org.team.mapper.product.ProductPaidMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -34,6 +35,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ProductLikeMapper likeMapper;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ProductPaidMapper paidMapper;
 	
 	@Setter(onMethod_ = @Autowired)
 	private PasswordEncoder encoder;
@@ -190,6 +194,24 @@ public class MemberServiceImpl implements MemberService {
 		log.info("*** Service in ckeck ***");
 		
 		return mapper.insert2(vo);
-		
+	
+	@Override
+	public List<ProductVO> getPaidList(String userid) {
+		return paidMapper.getPaidList(userid);
+	}
+	
+	@Override
+	public List<ProductVO> getPaidListWebtoon(String userid) {
+		return paidMapper.getPaidListWebtoon(userid);
+	}
+	
+	@Override
+	public List<ProductVO> getPaidListWebnovel(String userid) {
+		return paidMapper.getPaidListWebnovel(userid);
+	}
+	
+	@Override
+	public List<ProductVO> getPaidListBook(String userid) {
+		return paidMapper.getPaidListBook(userid);
 	}
 }

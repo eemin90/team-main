@@ -3,7 +3,13 @@ package org.team.controller.product;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.team.domain.member.MemberVO;
 import org.team.domain.product.ProductLikeVO;
+import org.team.domain.product.ProductPaidVO;
 import org.team.domain.product.ProductVO;
 import org.team.service.product.BookService;
 import org.team.service.product.ProductLikeService;
+import org.team.service.product.ProductPaidService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,6 +37,7 @@ public class BookController {
 
 	private BookService service;
 	private ProductLikeService likeService;
+	private ProductPaidService paidService;
 	
 	@GetMapping("/list")
 	public void list(Model model) {
@@ -46,23 +55,35 @@ public class BookController {
 	}
 	
 	@GetMapping("/get")
-	public void get(@RequestParam Long id, Model model, Principal principal) {
+	public void get(@RequestParam Long id, Model model, Principal principal, Authentication authentication, HttpSession session) {
 		log.info("***book get method***");
 		
 		ProductVO vo = service.get(id);
 		model.addAttribute("book", vo);
 		
-		// 해당 상품을 읽어올 때 현재 사용자가 해당 상품에 좋아요를 눌렀었는지 확인
-		if (principal != null) { // 로그인 상태가 아니면 아래의 principal.getName()에서 NullPointerException이 발생하므로 로그인 상태인 경우만
+		// 로그인 상태가 아니면 아래의 principal.getName()에서 NullPointerException이 발생하므로 로그인 상태인 경우만
+		if (principal != null) {
+			// 해당 상품을 읽어올 때 현재 사용자가 해당 상품에 좋아요를 눌렀었는지 확인
 			ProductLikeVO lvo = likeService.get(id.toString(), principal.getName());
 			model.addAttribute("like", lvo);
+			
+			// 해당 상품을 읽어올 때 현재 사용자가 해당 상품을 구매했었는지 확인
+			ProductPaidVO pvo = paidService.getPaid(id.toString(), principal.getName());
+			model.addAttribute("paid", pvo);
+			
+			// 현재 사용자의 잔여캐시를 session에 넣어서 navbar의 내 정보에서도 잔여캐시가 보이게 설정
+			MemberVO mvo = paidService.getUserMoney(principal.getName());
+			session.setAttribute("userMoney", mvo);
+			
+			// 정기권 구매자인지 확인을 위해 현재 사용자 권한 정보 넘김(예: [ROLE_ADMIN] )
+			model.addAttribute("auth", authentication.getAuthorities());
 		}
 		
 	}
 	
 	@GetMapping("/detail")
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-	public void detail(@RequestParam Long id, Model model) {
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PASS', 'ROLE_USER')")
+	public void detail(@RequestParam Long id, Model model, Principal principal, Authentication authentication) {
 		log.info("***book detail method***");
 		
 		ProductVO vo = service.getFile(id);
@@ -70,6 +91,16 @@ public class BookController {
 		service.plusCnt(id);
 		
 		model.addAttribute("book", vo);
+		
+		// 로그인 상태가 아니면 아래의 principal.getName()에서 NullPointerException이 발생하므로 로그인 상태인 경우만
+		if (principal != null) {
+			// 해당 상품을 읽어올 때 현재 사용자가 해당 상품을 구매했었는지 확인
+			ProductPaidVO pvo = paidService.getPaid(id.toString(), principal.getName());
+			model.addAttribute("paid", pvo);
+			
+			// 정기권 구매자인지 확인을 위해 현재 사용자 권한 정보 넘김(예: [ROLE_ADMIN] )
+			model.addAttribute("auth", authentication.getAuthorities());
+		}
 	}
 	
 	@GetMapping("/modify")

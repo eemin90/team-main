@@ -9,7 +9,7 @@
 
 <%@ include file="/WEB-INF/subModules/bootstrapHeader.jsp" %>
 
-<title>Insert title here</title>
+<title>수정/삭제ㅣLeeBook</title>
 
 <script>
 $(document).ready(function() {
@@ -26,52 +26,55 @@ $(document).ready(function() {
 </head>
 <body>
 <pj:navbar></pj:navbar>
-<div class="container">
-	<h1>글 수정/삭제</h1>
-	
-	<div class="row">
-		<div class="col-12">
-			<form id="modify-form1" action="${appRoot }/board/modify" method="post" enctype="multipart/form-data">
-				<input hidden name="bno" value="${board.bno }" />
-				<div class="form-group">
-					<label for="input1">제목</label>
-					<input id="input1" value="${board.title }" class="form-control" name="title">
-				</div>
-				<div class="form-group">
-					<label for="textarea1">내용</label>
-					<textarea id="textarea1" class="form-control" 
-					name="content"><c:out value="${board.content }" /></textarea>
-				</div>
-				
-				<c:if test="${not empty board.fileName }"> 
-					<div>
-						<img class="img-fluid" 
-						src="${imgRoot}${board.bno }/${board.fileName}">
+<div id="div-white" class="container mb-3">
+	<div id="div-white-wrapper" class="container">
+		<h4>글 수정/삭제</h4>
+		
+		<div class="row">
+			<div class="col-12">
+				<form id="modify-form1" action="${appRoot }/board/modify" method="post" enctype="multipart/form-data">
+					<input hidden name="bno" value="${board.bno }" />
+					<div class="form-group">
+						<label for="input1">제목</label>
+						<input id="input1" value="${board.title }" class="form-control" name="title">
 					</div>
-				</c:if>
-				
-				<div class="form-group">
-					<label for="input3">파일</label>
-					<input id="input3" class="form-control" type="file" name="file" accept="image/*"><br>
-					<input id="file-remove-btn1" class="btn btn-danger" type="button" value="파일삭제" />
-				</div>
-				
-				<div class="form-group">
-					<label for="input2">작성자</label>
-					<input readonly="readonly" value="${board.writer }" id="input2" class="form-control" name="writer">
-				</div>
-				<input hidden name="pageNum" value="${cri.pageNum }" />
-				<input hidden name="amount" value="${cri.amount }" />
-				<input hidden name="type" value="${cri.type }" />
-				<input hidden name="keyword" value="${cri.keyword }" />
+					<div class="form-group">
+						<label for="textarea1">내용</label>
+						<textarea id="textarea1" class="form-control" 
+						name="content"><c:out value="${board.content }" /></textarea>
+					</div>
 					
-				<input class="btn btn-warning" type="submit" value="수정" />
-				<input id="board-remove-btn1" class="btn btn-danger" type="button" value="삭제" />
-				
-				
-			</form>
+					<c:if test="${not empty board.fileName }"> 
+						<div>
+							<img class="img-fluid" 
+							src="${imgRoot}${board.bno }/${board.fileName}">
+						</div>
+					</c:if>
+					
+					<div class="form-group">
+						<label for="input3">파일</label>
+						<input id="input3" class="form-control" type="file" name="file" accept="image/*"><br>
+						<input id="file-remove-btn1" class="btn btn-danger" type="button" value="파일삭제" />
+					</div>
+					
+					<div class="form-group">
+						<label for="input2">작성자</label>
+						<input readonly="readonly" value="${board.writerName }" id="input2" class="form-control">
+						<input hidden value="${board.writer }" id="input2" class="form-control" name="writer">
+					</div>
+					<input hidden name="pageNum" value="${cri.pageNum }" />
+					<input hidden name="amount" value="${cri.amount }" />
+					<input hidden name="type" value="${cri.type }" />
+					<input hidden name="keyword" value="${cri.keyword }" />
+						
+					<input class="btn btn-warning" type="submit" value="수정" />
+					<input id="board-remove-btn1" class="btn btn-danger" type="button" value="삭제" />
+					
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
+<pj:footer />
 </body>
 </html>

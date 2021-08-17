@@ -15,9 +15,8 @@
 		<c:param name="keyword" value="${cri.keyword }"></c:param>
 		<c:param name="type" value="${cri.type }"></c:param>
 </c:url>
-
-<div class="container">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div id="div-white" class="container">
+<nav class="navbar navbar-expand-lg">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       
@@ -44,7 +43,6 @@
   </form>
 </nav>
 </div>
-
 
 
 

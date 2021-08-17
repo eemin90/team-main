@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.team.domain.member.AuthVO;
 import org.team.domain.member.MemberVO;
+import org.team.domain.product.ProductPaidVO;
 
 
 public interface MemberMapper {
@@ -29,5 +30,9 @@ public interface MemberMapper {
 	public void setPw(@Param("pw") String pw, @Param("userid") String userid);
 
 	public int insert2(MemberVO vo);
+  
+	public MemberVO readMoney(ProductPaidVO vo);
+
+	public void buyProduct(ProductPaidVO vo);
 
 }

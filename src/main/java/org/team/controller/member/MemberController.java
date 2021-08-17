@@ -2,7 +2,6 @@ package org.team.controller.member;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -258,34 +256,66 @@ public class MemberController {
 		}
 	}
 	
-	@GetMapping("/likes")
+	@RequestMapping("/likes")
 	@PreAuthorize("isAuthenticated()")
-	public void likes(@RequestParam("userid") String userid, Model model) {
+	public void likes(String userid, Model model) {
 		List<ProductVO> list = service.getLikes(userid);
 		
 		model.addAttribute("list", list);
 	}
 	
-	@GetMapping("/likesWebtoon")
+	@RequestMapping("/likesWebtoon")
 	@PreAuthorize("isAuthenticated()")
-	public void likesWebtoon(@RequestParam("userid") String userid, Model model) {
+	public void likesWebtoon(String userid, Model model) {
 		List<ProductVO> webtoon = service.getWebtoonLikes(userid);
 		
 		model.addAttribute("webtoon", webtoon);
 	}
 	
-	@GetMapping("/likesWebnovel")
+	@RequestMapping("/likesWebnovel")
 	@PreAuthorize("isAuthenticated()")
-	public void likesWebnovel(@RequestParam("userid") String userid, Model model) {
+	public void likesWebnovel(String userid, Model model) {
 		List<ProductVO> webnovel = service.getWebnovelLikes(userid);
 		
 		model.addAttribute("webnovel", webnovel);
 	}
 	
-	@GetMapping("/likesBook")
+	@RequestMapping("/likesBook")
 	@PreAuthorize("isAuthenticated()")
-	public void likesBook(@RequestParam("userid") String userid, Model model) {
+	public void likesBook(String userid, Model model) {
 		List<ProductVO> book = service.getBookLikes(userid);
+		
+		model.addAttribute("book", book);
+	}
+	
+	@RequestMapping("/paidList")
+	@PreAuthorize("isAuthenticated()")
+	public void paidList(String userid, Model model) {
+		List<ProductVO> list = service.getPaidList(userid);
+		
+		model.addAttribute("list", list);
+	}
+	
+	@RequestMapping("/paidListWebtoon")
+	@PreAuthorize("isAuthenticated()")
+	public void paidListWebtoon(String userid, Model model) {
+		List<ProductVO> webtoon = service.getPaidListWebtoon(userid);
+		
+		model.addAttribute("webtoon", webtoon);
+	}
+	
+	@RequestMapping("/paidListWebnovel")
+	@PreAuthorize("isAuthenticated()")
+	public void paidListWebnovel(String userid, Model model) {
+		List<ProductVO> webnovel = service.getPaidListWebnovel(userid);
+		
+		model.addAttribute("webnovel", webnovel);
+	}
+	
+	@RequestMapping("/paidListBook")
+	@PreAuthorize("isAuthenticated()")
+	public void paidListBook(String userid, Model model) {
+		List<ProductVO> book = service.getPaidListBook(userid);
 		
 		model.addAttribute("book", book);
 	}

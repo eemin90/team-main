@@ -57,5 +57,15 @@
 		SELECT check_dislike FROM tbl_board_dislike
 		WHERE bno = #{bno} AND writer = #{userid}
 	</select>
+	
+	<delete id="deleteLikeByBno">
+		DELETE FROM tbl_board_like
+		WHERE bno = #{bno}
+	</delete>
+	
+	<delete id="deleteDislikeByBno">
+		DELETE FROM tbl_board_dislike
+		WHERE bno = #{bno}
+	</delete>
 
 </mapper>

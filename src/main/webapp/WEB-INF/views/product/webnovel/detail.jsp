@@ -21,6 +21,9 @@ var userid = "${pinfo.member.userid}";
 <pj:navbar1 />
 <div class="container">
 
+	<input type="text" id="check-paid" value="${paid.check_paid}" hidden />
+	<input type="text" id="user-auth" value="${auth}" hidden />
+
 	<%-- 내용 상세 --%>
 	<div id="div-white" class="container mb-3">
 		<div id="detail-div">

@@ -1,6 +1,5 @@
 package org.team.service.product;
 
-import org.team.domain.member.MemberVO;
 import org.team.domain.product.ProductLikeVO;
 
 public interface ProductLikeService {
