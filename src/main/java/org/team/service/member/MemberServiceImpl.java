@@ -2,6 +2,7 @@ package org.team.service.member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -187,6 +188,12 @@ public class MemberServiceImpl implements MemberService {
 	public List<ProductVO> getBookLikes(String userid) {
 		return likeMapper.getBookLikes(userid);
 	}
+
+	@Override
+	public int method(MemberVO vo) {
+		log.info("*** Service in ckeck ***");
+		
+		return mapper.insert2(vo);
 	
 	@Override
 	public List<ProductVO> getPaidList(String userid) {

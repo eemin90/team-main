@@ -3,6 +3,7 @@ package org.team.controller.member;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -183,7 +184,7 @@ public class MemberController {
 		MemberVO vo = service.read2(username, usermail);
 		if(vo != null) {
 			
-			model.addAttribute("userid", vo.getUserid());
+			model.addAttribute("userid", "고객님의 아이디는 " + vo.getUserid() + "입니다.");
 
 		}else {
 			
@@ -344,11 +345,17 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/pay3")
-	public @ResponseBody void chargePoint(Long amount) {
-		System.out.println(amount);
+	@PostMapping("/point")
+	@ResponseBody
+	public void method(@RequestParam MemberVO vo, HttpServletRequest request) {
+		log.info("**** point in ****");
+		
+		log.info(vo);
+		
+		service.method(vo);
+	}
 		
 		
 	}
 	
-}
+

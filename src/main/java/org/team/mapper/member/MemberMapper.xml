@@ -71,6 +71,10 @@
 		VALUES
 		(#{userid}, #{userpw}, #{userName}, #{usermail})
 	</insert>
+	
+	<insert id="insert2">
+		UPDATE tbl_member SET money = money + #{money} WHERE userid = #{userid};
+	</insert>
 
 	<insert id="insertAuth">
 		INSERT INTO tbl_member_auth
@@ -88,6 +92,8 @@
 		m.regdate regdate,
 		m.updateDate updateDate,
 		m.usermail usermail,
+		m.tel tel,
+		m.addr addr,
 		m.money money,
 		a.auth auth
 		FROM
@@ -105,6 +111,8 @@
 		<result property="usermail" column="usermail" />
 		<result property="userName" column="username" />
 		<result property="regdate" column="regdate" />
+		<result property="tel" column="tel" />
+		<result property="addr" column="addr" />
 		<result property="updateDate" column="updateDate" />
 		<result property="enabled" column="enabled" />
 		<result property="money" column="money" />

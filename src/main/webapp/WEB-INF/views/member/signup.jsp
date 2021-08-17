@@ -178,17 +178,22 @@
 						<label for="signup-input3">이름</label> <input type="text"
 							class="form-control" id="signup-input3" name="userName">
 					</div>
+					<div class="form-group">
+						<label for="signup-input3">전화번호</label> <input type="text"
+							class="form-control" id="signup-tel" name="tel">
+					</div>
+					<div class="form-group">
+					<label for="signup-input3">주소</label> <input type="text"
+							class="form-control" id="signup-addr" name="addr">
+					</div>
 
 					<div class="form-group">
 						<label for="singup-mail">이메일</label>
-						<div class="input-group">
+					<div class="input-group">
 
-							<input type="text" class="form-control" id="singup-mail"
-								name="usermail" title="Email">
-							<div class="input-group-append">
-								<button style="display: inline;"
-									class="btn btn-outline-secondary" id="mail-regularly"
-									type="button">인증메일 발송</button>
+					<input type="text" class="form-control" id="singup-mail" name="usermail" title="Email">
+					<div class="input-group-append">
+					<button style="display: inline;" class="btn btn-outline-secondary" id="mail-regularly" type="button">인증메일 발송</button>
 							</div>
 						</div>
 

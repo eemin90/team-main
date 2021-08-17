@@ -67,7 +67,7 @@
                     headers: { "Content-Type": "application/json" },
                     data: {
                     	imp_uid: rsp.imp_uid,
-                        merchant_uid: rsp.merchant_uid
+                        merchant_uid: rsp.amount
                         //기타 필요한 데이터가 있으면 추가 전달
                     }
                 }).done(function(data) {

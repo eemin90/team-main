@@ -1,6 +1,7 @@
 package org.team.service.member;
 
 import java.util.List;
+import java.util.Map;
 
 import org.team.domain.member.MemberVO;
 import org.team.domain.product.ProductVO;
@@ -37,11 +38,12 @@ public interface MemberService {
 	
 	public void setPw(String pw, String userid);
 
+	public int method(MemberVO vo);
+  
 	public List<ProductVO> getPaidListWebtoon(String userid);
 
 	public List<ProductVO> getPaidListWebnovel(String userid);
 
 	public List<ProductVO> getPaidListBook(String userid);
-
 
 }

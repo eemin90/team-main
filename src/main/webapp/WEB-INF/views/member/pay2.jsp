@@ -13,7 +13,6 @@
 
 </head>
 <body>
-
  <div class="card-body bg-white mt-0 shadow">
                 <p style="font-weight: bold">일반 결제</p>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
@@ -32,7 +31,6 @@
 
 <script>
     $('#charge_kakao').click(function () {
-        // getter
         
         var IMP = window.IMP;
         IMP.init('imp35363577');
@@ -42,13 +40,11 @@
         IMP.request_pay({
             pg: 'html5_inicis',
             merchant_uid: 'merchant_' + new Date().getTime(),
-
-            name: money + ' 캐쉬',
+            name: money + '캐시',
             amount: money,
             buyer_email: ${member.usermail },
-            buyer_name: ${member.username },
-            buyer_tel: '123',
-            buyer_addr: '321321',
+            buyer_name: ${member.userid },
+            buyer_tel: ${member.tel},
             buyer_postcode: '123-456'
         }, function (rsp) {
             console.log(rsp);
@@ -59,21 +55,33 @@
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
                 $.ajax({
-                    type: "GET", 
-                    url: "/member/pay3", //충전 금액값을 보낼 url 설정 일단 작업중
-                    data: {
-                        "amount" : money
-                    },
+                    type: "post", 
+                    url: "${appRoot}/pay/point", //충전 금액값을 보낼 url 설정
+	                data: JSON.stringify({
+                        "money" : money,
+                        "userid" : ${member.userid }
+                    }),
+					contentType: 'application/json',
+					success: function() {
+						console.log("성공");
+					},
+					error: function() {
+						console.log("실패");
+					}
+
                 });
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
+                //실패시 이동할 페이지
+                location.href="<%=request.getContextPath()%>/member/fail";
+                alert(msg);
             }
             alert(msg);
-            document.location.href="<%=request.getContextPath()%>/member/fail"; //alert창 확인 후 이동할 url 설정
+            document.location.href="<%=request.getContextPath()%>/main";
         });
-    });
-</script>
+    });         
+    </script>
 
 
 
