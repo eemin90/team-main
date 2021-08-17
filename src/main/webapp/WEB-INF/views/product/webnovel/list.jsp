@@ -70,7 +70,15 @@
 						<div id="product-list-div" class="card mx-2 my-2">
 							<img src="${imgRoot}webtoon/${today.id}/cover/${today.file_name}" class="card-img-top">
 							<div class="card-body">
-								<p class="card-text text-dark">${today.product_name}</p>
+								<!-- 제목의 길이가 9 이상이면 8자 까지만 출력하고 뒤에 '...'을 붙인다 -->
+								<c:choose>
+									<c:when test="${fn:length(today.product_name) >= 9}">
+										<p class="card-text text-dark">${fn:substring(today.product_name, 0, 8)}...</p>
+									</c:when>
+									<c:when test="${fn:length(today.product_name) < 9}">
+										<p class="card-text text-dark">${today.product_name}</p>
+									</c:when>
+								</c:choose>
 							</div>
 						</div>
 					</a>
@@ -83,7 +91,14 @@
 						<div id="product-list-div" class="card mx-2 my-2">
 							<img src="${imgRoot}webnovel/${today.id}/cover/${today.file_name}" class="card-img-top">
 							<div class="card-body">
-								<p class="card-text text-dark">${today.product_name}</p>
+								<c:choose>
+									<c:when test="${fn:length(today.product_name) >= 9}">
+										<p class="card-text text-dark">${fn:substring(today.product_name, 0, 8)}...</p>
+									</c:when>
+									<c:when test="${fn:length(today.product_name) < 9}">
+										<p class="card-text text-dark">${today.product_name}</p>
+									</c:when>
+								</c:choose>
 							</div>
 						</div>
 					</a>
@@ -96,7 +111,14 @@
 						<div id="product-list-div" class="card mx-2 my-2">
 							<img src="${imgRoot}book/${today.id}/cover/${today.file_name}" class="card-img-top">
 							<div class="card-body">
-								<p class="card-text text-dark">${today.product_name}</p>
+								<c:choose>
+									<c:when test="${fn:length(today.product_name) >= 9}">
+										<p class="card-text text-dark">${fn:substring(today.product_name, 0, 8)}...</p>
+									</c:when>
+									<c:when test="${fn:length(today.product_name) < 9}">
+										<p class="card-text text-dark">${today.product_name}</p>
+									</c:when>
+								</c:choose>
 							</div>
 						</div>
 					</a>
@@ -127,7 +149,15 @@
 				<div id="product-list-div" class="card mx-2 my-2">
 					<img src="${imgRoot}webnovel/${webnovel.id}/cover/${webnovel.file_name}" class="card-img-top">
 					<div class="card-body">
-						<p class="card-text text-dark">${webnovel.product_name}</p>
+						<!-- 제목의 길이가 9 이상이면 8자 까지만 출력하고 뒤에 '...'을 붙인다 -->
+						<c:choose>
+							<c:when test="${fn:length(webnovel.product_name) >= 9}">
+								<p class="card-text text-dark">${fn:substring(webnovel.product_name, 0, 8)}...</p>
+							</c:when>
+							<c:when test="${fn:length(webnovel.product_name) < 9}">
+								<p class="card-text text-dark">${webnovel.product_name}</p>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</a>
