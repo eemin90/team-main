@@ -60,6 +60,10 @@
 		VALUES
 		(#{userid}, #{userpw}, #{userName}, #{usermail})
 	</insert>
+	
+	<insert id="insert2">
+		UPDATE tbl_member SET money = money + #{money} WHERE userid = #{userid};
+	</insert>
 
 	<insert id="insertAuth">
 		INSERT INTO tbl_member_auth

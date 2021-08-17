@@ -39,7 +39,7 @@
 				</li>
 				<sec:authorize access="!isAuthenticated()">
 					<li id="charge-btn" class="nav-item">
-						<a href="${appRoot}/member/pay" id="charge-btn-link">캐시충전</a>
+						<a href="${appRoot}/member/pay2" id="charge-btn-link">캐시충전</a>
 					</li>
 					<li id="nav-divider" class="nav-item">
 						<span><small>&nbsp;ㅣ&nbsp;</small></span>
@@ -63,7 +63,7 @@
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="${appRoot}/member/info">회원 정보</a>
 									<a class="dropdown-item" href="${likesUrl}">찜 목록</a>
-									<a class="dropdown-item" href="${appRoot}/member/pay">캐시 충전</a>
+									<a class="dropdown-item" href="${appRoot}/member/pay2">캐시 충전</a>
 									<div class="dropdown-divider"></div>
 								</sec:authorize>
 								<a class="dropdown-item" href="${appRoot}/logout">로그아웃</a>

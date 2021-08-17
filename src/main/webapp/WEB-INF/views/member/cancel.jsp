@@ -15,7 +15,8 @@
 <body>
 <pj:navbar />
 <div class="container">
-   <h1>결재취소</h1>
+   <h1>결재취소가 취소 되었습니다 </h1>
+   
 </div>
 <pj:footer />
 </body>

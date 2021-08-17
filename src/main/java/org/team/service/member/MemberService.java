@@ -1,6 +1,7 @@
 package org.team.service.member;
 
 import java.util.List;
+import java.util.Map;
 
 import org.team.domain.member.MemberVO;
 import org.team.domain.product.ProductVO;
@@ -34,5 +35,7 @@ public interface MemberService {
 	public List<ProductVO> getBookLikes(String userid);
 
 	public void setPw(String pw, String userid);
+
+	public int method(MemberVO vo);
 
 }
