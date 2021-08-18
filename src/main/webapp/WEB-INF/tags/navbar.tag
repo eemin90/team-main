@@ -35,7 +35,7 @@
 				</li>
 				<sec:authorize access="!isAuthenticated()">
 					<li id="charge-btn" class="nav-item">
-						<a href="${appRoot}/member/pay2" id="charge-btn-link">캐시충전</a>
+						<a href="${appRoot}/member/pay" id="charge-btn-link">캐시충전</a>
 					</li>
 					<li id="nav-divider" class="nav-item">
 						<span><small>&nbsp;ㅣ&nbsp;</small></span>
