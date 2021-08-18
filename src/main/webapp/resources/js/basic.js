@@ -1,10 +1,9 @@
 $(function() {
-	/*
+	
 	// 마우스 우클릭, 드래그 차단
 	$(document).on("contextmenu dragstart selectstart", function(e){
         return false;
     });
-	*/
 	
 	// login.jsp 로그인 상태 유지 label에 마우스 enter, leave 일때 tooltip 
 	$('#remember-warning').on({
