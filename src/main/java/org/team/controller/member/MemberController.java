@@ -332,16 +332,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/pay2")
+	@PreAuthorize("isAuthenticated()")
 	public void pay2(Criteria cri, Principal principal, Model model) {
 		log.info("*** Check Connection(inicis) ***");
 		
-		log.info(principal.getName());
-		
-		MemberVO member = service.read(principal.getName());
-		
-		model.addAttribute("member",member);
-		
-		
+		if (principal != null) {
+			MemberVO member = service.read(principal.getName());
+			model.addAttribute("member", member);
+		}
 		
 	}
 	
