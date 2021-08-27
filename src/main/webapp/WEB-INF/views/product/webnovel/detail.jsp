@@ -33,17 +33,20 @@ var userid = "${pinfo.member.userid}";
 	
 	<%-- 댓글 목록 --%>
 	<div id="div-white" class="container p-3">
-		<h5>
-			댓글 <c:if test="${webnovel.reply_cnt > 0}"><small>[</small><small id="replyCnt">${webnovel.reply_cnt}</small><small>]</small></c:if>
-		</h5>
+		<div class="row justify-content-between m-1">
+			<span id="reply-lists">
+				댓글 <c:if test="${book.reply_cnt > 0}"><small>[</small><small id="replyCntBelow">${book.reply_cnt}</small><small>]</small></c:if>
+			</span>
+			<sec:authorize access="isAuthenticated()">
+				<button type="button" class="btn btn-light" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
+			</sec:authorize>
+		</div>
 		
 		<hr>
+		
 		<ul class="list-unstyled" id="reply-list-container">
 			
 		</ul>
-		<sec:authorize access="isAuthenticated()">
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-insert-modal">댓글 작성</button>
-		</sec:authorize>
 	</div>
 	
 	<%-- modal --%>
