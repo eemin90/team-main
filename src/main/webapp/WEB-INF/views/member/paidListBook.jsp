@@ -37,7 +37,14 @@
 					<div id="product-list-div" class="card mx-2 my-2">
 						<img src="${imgRoot}book/${list.id}/cover/${list.file_name}" class="card-img-top">
 						<div class="card-body">
-							<p class="card-text text-dark">${list.product_name}</p>
+							<c:choose>
+								<c:when test="${fn:length(list.product_name) >= 9}">
+									<p class="card-text text-dark">${fn:substring(list.product_name, 0, 8)}...</p>
+								</c:when>
+								<c:when test="${fn:length(list.product_name) < 9}">
+									<p class="card-text text-dark">${list.product_name}</p>
+								</c:when>
+							</c:choose>
 						</div>
 					</div>
 				</a>
